@@ -5,13 +5,23 @@ __author__ = 'bofh'
 
 import re
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 #------------------------------------------------------------------------------
 
 def print_board(f_board, f_num = 3):
-    print("\n------------------------------------------\n", " 1", " ", "2", " ", "3")
+    print(bcolors.BOLD + bcolors.HEADER + "\n------------------------------------------\n", bcolors.BOLD + bcolors.OKBLUE + " 1", " ", "2", " ", "3", bcolors.ENDC)
     for i in range(f_num):
-        print(" ---" * f_num)
-        print("|", f_board[i][0], "|", f_board[i][1], "|", f_board[i][2], "|", i + 1)
+        print(bcolors.BOLD + " ---" * f_num)
+        print("|", f_board[i][0], "|", f_board[i][1], "|", f_board[i][2], "|", bcolors.BOLD + bcolors.OKBLUE + str(i + 1), bcolors.ENDC)
     print(" ---" * f_num)
 
 #------------------------------------------------------------------------------
@@ -63,69 +73,12 @@ def check_if_filled():
 # -----------------------------------------------------------------------------
 
 def check_row_win(f_player1):
-    f_won = False
-
     for i in range(3):
         if (board[i][0] != " "):
             if (board[i][0] == board[i][1]) and (board[i][1] == board[i][2]):
                 f_winner = f_player1
                 f_won = True
                 break
-            else:
-                f_winner = f_player1
-                f_won = False
-
-    if (f_won) and (f_player1):
-        print("\nPlayer 1 won!\n")
-        return True
-    elif (f_won) and (not f_player1):
-        print("\nPlayer 2 won!\n")
-        return True
-    else:
-        return False
-
-# -----------------------------------------------------------------------------
-
-def check_col_win(f_player1):
-    f_won = False
-
-    for i in range(3):
-        if (board[0][i] != " "):
-            if (board[0][i] == board[1][i]) and (board[1][i] == board[2][i]):
-                f_winner = f_player1
-                f_won = True
-                break
-            else:
-                f_winner = f_player1
-                f_won = False
-
-    if (f_won) and (f_player1):
-        print("\nPlayer 1 won!\n")
-        return True
-    elif (f_won) and (not f_player1):
-        print("\nPlayer 2 won!\n")
-        return True
-    else:
-        return False
-
-# -----------------------------------------------------------------------------
-
-def check_diag_win(f_player1):
-    f_won = False
-
-    if (board[0][0] != " "):
-        if (board[0][0] == board[1][1]) and (board[1][1] == board[2][2]):
-            f_winner = f_player1
-            f_won = True
-        else:
-            f_winner = f_player1
-            f_won = False
-
-    if (not f_won):
-        if (board[0][2] != " "):
-            if (board[0][2] == board[1][1]) and (board[1][1] == board[2][0]):
-                f_winner = f_player1
-                f_won = True
             else:
                 f_winner = f_player1
                 f_won = False
@@ -158,7 +111,7 @@ if __name__ == "__main__":
         board[row][col] = "X"
         print_board(board)
 
-        won = check_row_win(player1) or check_col_win(player1) or check_diag_win(player1)
+        won = check_row_win(player1)
         if (not won):
             filled = check_if_filled()
         
@@ -172,4 +125,4 @@ if __name__ == "__main__":
             board[row][col] = "O"
             print_board(board)
 
-            won = check_row_win(player1) or check_col_win(player1) or check_diag_win(player1)
+            won = check_row_win(player1)
