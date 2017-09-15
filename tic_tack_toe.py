@@ -89,11 +89,8 @@ def check_row_win(f_player1):
                 f_winner = f_player1
                 f_won = False
 
-    if (f_won) and (f_player1):
-        print(bcolors.BOLD + bcolors.RED + "\nPlayer 1 won!\n")
-        return True
-    elif (f_won) and (not f_player1):
-        print(bcolors.BOLD + bcolors.CYAN + "\nPlayer 2 won!\n")
+    if (f_won):
+        print_winner(f_player1)
         return True
     else:
         return False
@@ -113,11 +110,8 @@ def check_col_win(f_player1):
                 f_winner = f_player1
                 f_won = False
 
-    if (f_won) and (f_player1):
-        print(bcolors.BOLD + bcolors.RED + "\nPlayer 1 won!\n")
-        return True
-    elif (f_won) and (not f_player1):
-        print(bcolors.BOLD + bcolors.CYAN + "\nPlayer 2 won!\n")
+    if (f_won):
+        print_winner(f_player1)
         return True
     else:
         return False
@@ -144,14 +138,19 @@ def check_diag_win(f_player1):
                 f_winner = f_player1
                 f_won = False
 
-    if (f_won) and (f_player1):
-        print(bcolors.BOLD + bcolors.RED + "\nPlayer 1 won!\n")
-        return True
-    elif (f_won) and (not f_player1):
-        print(bcolors.BOLD + bcolors.CYAN + "\nPlayer 2 won!\n")
+    if (f_won):
+        print_winner(f_player1)
         return True
     else:
         return False
+
+# -----------------------------------------------------------------------------
+
+def print_winner(f_player1):
+    if (f_player1):
+        print(bcolors.BOLD + bcolors.RED + "\nPlayer 1 won!\n")
+    else:
+        print(bcolors.BOLD + bcolors.CYAN + "\nPlayer 2 won!\n")
 
 # -----------------------------------------------------------------------------
 
